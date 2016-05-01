@@ -1,4 +1,4 @@
-; chapter 1 learning note
+; chapter 1 learng note
 ; exercise 2.1
 (define (make-rat n d)
   (let ((g (gcd n d)))
@@ -46,7 +46,8 @@
 (define end-segment cdr)
 
 (define (midpoint-segment segment)
-  (make-point (/ (+ (x-point (start-segment segment)) (x-point (end-segment segment))) 2) (/ (+ (y-point (start-segment segment)) (y-point (end-segment segment))) 2)))
+  (make-point (/ (+ (x-point (start-segment segment)) (x-point (end-segment segment))) 2) 
+    (/ (+ (y-point (start-segment segment)) (y-point (end-segment segment))) 2)))
 
 (define sgmt-1 (make-segment (make-point 1 2) (make-point 2 3)))
 (print-point (midpoint-segment (make-segment (make-point 1 2) (make-point 2 4))))
@@ -56,11 +57,13 @@
 (define (add-1 n)
   (lambda (f) (lambda (x) (f ((n f) x)))))
 
-;
+;length of list
 (define (length items)
   (if (null? items)
     0
     (+ 1 (length (cdr items)))))
+
+;refer a item of list with the given index n
 (define (list-ref items n)
   (if (= n 0)
     (car items)
@@ -82,6 +85,19 @@
   (if (null? items)
     res
     (itr (cdr items) (cons (car items) res))))
+
+(define (scale-list n items)
+  (if (null? items)
+    0
+    (cons (* (car items) n) (scale-list n (cdr items)))))
+
+;map
+(define (mapping items proc)
+  (if (null?  items)
+    '()
+    (cons (proc (car items)) (mapping (cdr items) proc))))
+
+;test
 (define l (list 1 2 3 4))
 (define squarts (list 1 4 9 16))
 ;(length squarts)
@@ -91,6 +107,8 @@
 (last-pair l)
 (last-pair squarts)
 (reverse l)
+(define (10-times x) (* 10 x))
+(mapping l 10-times)
 
 ;exercise 2.20
 (define (same-parity sample . others)
@@ -100,3 +118,12 @@
           (cons sample others)))
 
 (same-parity 1 3 4 5)
+(list '' a)
+
+
+
+
+
+
+
+
